@@ -78,82 +78,119 @@ You'll be prompted for password and server will return the password hash that yo
 #### Variables
 
 `SSL_CERT`
+
 server certificate location inside container
+
 default: /opt/sshi/ssl/cert.pem
 
 `SSL_KEY`
+
 server certificate key location inside container
+
 default: /opt/sshi/ssl/key.pem
 
 `CA_KEY`
+
 certificate signing key location inside container
+
 default: /opt/sshi/ssl/ca-key.pem
 
 `CA_KEY_GENERATE`
+
 certificate signing key will be create automatically if it doesn't exist
+
 default: true
 
 `CA_KEY_AUTOADD`
+
 certificate signing key will be added to servers ssh-agent automatically during startup if set to true and key exists
+
 default: true
 
 `AUTH_TYPE`
+
 defines authentication method. available values: file/ldap
+
 default: file
 
 `FILE_USER`
+
 default username for file auth type
+
 default: test
 
 `FILE_PASSWORD`
+
 default password for FILE_USER
+
 default: testpassword
 
 `AUTH_REALM`
+
 realm name presented to user during login
+
 default: default realm
 
 `AUTH_FRIENDLY_NAME`
+
 this will be written to issued certificate keyId
+
 default: default auth
 
 `MAX_CERT_LIFETIME`
+
 the maximum lifetime for certificate that user can request
+
 default: 24h
 
 `DEFAULT_CERT_LIFETIME`
+
 default certificate lifetime if none requested
+
 default: 8h
 
 if `AUTH_TYPE` is set to ldap, following variables are used
 
 `LDAP_SERVER`
+
 ldap connection string.
+
 example: ldaps://ldap-server.tld:636
 
 `LDAP_INSECURE`
+
 if insecure connection to LDAP is allowed
 
 `LDAP_USER_BIND_DN`
+
 authenticated users need to able to bind as themself against LDAP server, no generic user account used here
+
 example: uid={{.UserName}},ou=users,dc=example,dc=com
 
 `LDAP_USER_SEARCH_BASE`
+
 example: ou=users,dc=example,dc=com
 
 `LDAP_USER_SEARCH_FILTER`
+
 example: (uid={{.UserName}})
 
 `LDAP_GROUP_SEARCH_BASE`
+
 example: ou=groups,dc=example,dc=com
 
 `LDAP_GROUP_SEARCH_FILTER`
+
 example: (&(objectClass=posixGroup)(memberUid={{.UserName}}))
 
 `LDAP_SUBJECT_TEMPLATE`
+
 this LDAP field will be shown in SSH cert KeyId
+
 example: {{.User.cn}}
 
 `LDAP_PRINCIPAL_TEMPLATE`
+
 this ldap field will be added as principal to issued SSH cert
+
 example: {{.Group.cn}}
