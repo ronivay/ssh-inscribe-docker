@@ -59,6 +59,8 @@ docker-compose example will bind mount host directory to containers `/opt/sshi` 
 
 #### additional users
 
+NOTE: automatically created user isn't safe as password is in clear text in .env config and inside container as env var. up to you to decide if this is enough for your usecase
+
 by default, only one user is created to `users.yml` file based on `FILE_USER` and `FILE_PASSWORD` variables. This works fine for single user purpose, but defining multiple users require one to edit `sshi/users.yml` file.
 
 append new users to config with following lines
@@ -105,11 +107,15 @@ default: /opt/sshi/ssl/ca-key.pem
 
 certificate signing key will be create automatically if it doesn't exist
 
+note: unsafe as key doesn't have any passphrase or encryption
+
 default: true
 
 `CA_KEY_AUTOADD`
 
 certificate signing key will be added to servers ssh-agent automatically during startup if set to true and key exists
+
+note: unsafe as key needs to be unencrypted
 
 default: true
 
