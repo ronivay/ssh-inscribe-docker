@@ -15,8 +15,6 @@ RUN wget -O /usr/local/bin/ssh-inscribe https://github.com/aakso/ssh-inscribe/re
     chmod +x /usr/local/bin/ssh-inscribe
 
 # create user
-#RUN ${SSHI_UID:-"1995"} ${SSHI_GID:-"1995"} groupadd -g 911 -r sshi && \
-#    useradd -m -d /opt/sshi -u 911 -r -g sshi sshi
 RUN if [ -z ${SSHI_GID} ]; then groupadd -g 1995 -r sshi; else groupadd -g ${SSHI_GID} -r sshi; fi && \
     if [ -z ${SSHI_UID} ]; then useradd -m -d /opt/sshi -u 1995 -r -g sshi sshi; else \
     useradd -m -d /opt/sshi -u ${SSHI_UID} -r -g sshi sshi; fi
