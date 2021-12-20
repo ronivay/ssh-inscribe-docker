@@ -25,10 +25,16 @@ For best outcome you should do the following:
 ```
 git clone https://github.com/ronivay/ssh-inscribe-docker
 ```
-- Copy `env-example` file as `.env`
+- build container and generate .env config
 ```
-cp env-example .env
+make build-container
+make genconfig
 ```
+or with single command:
+```
+make build
+```
+
 - edit configuration variables in `.env` file to match your preference. 
 - start container with docker-compose
 ```
@@ -39,13 +45,13 @@ Server is now accessible at `https://<docker-host-ip>:8540` ready to be signing 
 
 You need to use `--insecure` option with sshi client as the server is running with self-signed certificate by default. 
 
-Additionally you can run following:
+Optionally you can use images available at [dockerhub](https://hub.docker.com/r/ronivay/ssh-inscribe-docker)
+
+User inside container runs by default with UID/GID 1995, you can change this during build like so:
 
 ```
-make build
+make build SSHI_UID=xxxx SSHI_GID=xxxx
 ```
-
-this will build container locally and copy sample configuration as .env file
 
 #### volumes
 

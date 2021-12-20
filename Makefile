@@ -1,10 +1,14 @@
 SSHI_VERSION = 0.9.1
+SSHI_UID = 1995
+SSHI_GID = 1995
 
 .PHONY: build-container
 build-container:
 	docker build --pull \
 	--build-arg SSHI_VERSION=$(SSHI_VERSION) \
-	-t ssh-inscribe:latest .
+	--build-arg SSHI_UID=$(SSHI_UID) \
+	--build-arg SSHI_GID=$(SSHI_GID) \
+	-t ssh-inscribe:latest container/.
 
 .PHONY: genconfig
 genconfig:
