@@ -1,0 +1,11 @@
+version: '3'
+services:
+    ssh-inscribe:
+        restart: unless-stopped
+        image: ssh-inscribe:latest
+        container_name: ssh-inscribe
+        ports:
+            - "8540:8540"
+        env_file: .env
+        volumes:
+          - ./sshi:/opt/sshi

@@ -1,0 +1,64 @@
+{% if env['AUTH_TYPE'] == "file" %}
+authfile:
+  name: {{ env['AUTH_FRIENDLY_NAME'] }}
+  realm: {{ env['AUTH_REALM'] }}
+  path: /opt/sshi/conf/users.yml
+{% endif %}
+{% if env['AUTH_TYPE'] == "ldap" %}
+authldap:
+  name: {{ env ['AUTH_FRIENDLY_NAME'] }}
+  realm: {{ env['AUTH_REALM'] }}
+  serverURL: {{ env['LDAP_SERVER'] }}
+  timeout: 5
+  insecure: {{ env['LDAP_INSECURE'] }}
+  userBindDN: '{{ env['LDAP_USER_BIND_DN'] }}'
+  userSearchBase: {{ env['LDAP_USER_SEARCH_BASE'] }}
+  userSearchFilter: '{{ env['LDAP_USER_SEARCH_FILTER'] }}'
+  userSearchGetAttributes:
+  - cn
+  - displayName
+  addPrincipalsFromGroups: true
+  groupSearchBase: {{ env['LDAP_GROUP_SEARCH_BASE'] }}
+  groupSearchFilter: '{{ env['LDAP_GROUP_SEARCH_FILTER'] }}'
+  groupSearchGetAttributes:
+  - cn
+  subjectNameTemplate: '{{ env['LDAP_SUBJECT_TEMPLATE'] }}'
+  principalTemplate: '{{ env['LDAP_PRINCIPAL_TEMPLATE'] }}'
+  userNamePrincipal: true
+  principals: []
+  criticalOptions: {}
+  extensions: {}
+{% endif %}
+logging:
+  defaultLevel: info
+  packageLevel: {}
+  format: text
+  enableConsole: true
+  enableSyslog: false
+  syslogURL: ""
+server:
+  listen: :8540
+  TLSCertFile: "{{ env['SSL_CERT'] }}"
+  TLSKeyFile: "{{ env['SSL_KEY'] }}"
+  TLSCertFiles: []
+  TLSKeyFiles: []
+  TLSCertNames: []
+  authBackends:
+{% if env['AUTH_TYPE'] == "file" %}
+  - type: authfile
+    config: authfile
+    default: true
+{% else %}
+  - type: authldap
+    config: authldap
+    default: true
+{% endif %}
+  defaultAuthBackends: []
+  maxCertLifetime: {{ env['MAX_CERT_LIFETIME'] }}
+  defaultCertLifetime: {{ env['DEFAULT_CERT_LIFETIME'] }}
+  caChallengeLifetime: 5m
+  agentSocket: /ssh-agent/ssh_inscribe_agent.sock
+  pkcs11Provider: ""
+  pkcs11Pin: ""
+  certSigningKeyFingerprint: ""
+  tokenSigningKey: ""

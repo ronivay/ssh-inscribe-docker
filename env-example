@@ -1,0 +1,43 @@
+AUTH_TYPE=file
+
+# server cert/key files
+SSL_CERT=/opt/sshi/ssl/cert.pem
+SSL_KEY=/opt/sshi/ssl/key.pem
+
+# path to certificate signing key
+CA_KEY=/opt/sshi/ssl/ca-key.pem
+# add certificate signing key to ssh-agent automatically. this works only if key is unencrypted
+CA_KEY_AUTOADD=true
+# generate certificate signing key if doesn't exist
+CA_KEY_GENERATE=true
+
+# default user/password that is created if auth type is file
+FILE_USER=test
+FILE_PASSWORD=testpassword
+
+# realm name presented during login
+AUTH_REALM="default realm"
+# another parameter presented during login
+AUTH_FRIENDLY_NAME="default"
+
+# max cert validity period a user can request
+MAX_CERT_LIFETIME=24h
+# default cert validity period if not defined
+DEFAULT_CERT_LIFETIME=8h
+
+# ldap details, no effect if AUTH_TYPE is not ldap
+# examples should work against openLDAP
+
+LDAP_SERVER=ldaps://ldap.server.tld:636
+# insecure LDAP connection
+LDAP_INSECURE=false
+LDAP_USER_BIND_DN=uid={{.UserName}},ou=users,dc=example,dc=com
+LDAP_USER_SEARCH_BASE=ou=users,dc=example,dc=com
+LDAP_USER_SEARCH_FILTER=(uid={{.UserName}})
+LDAP_GROUP_SEARCH_BASE=ou=groups,dc=example,dc=com
+LDAP_GROUP_SEARCH_FILTER=(&(objectClass=posixGroup)(memberUid={{.UserName}}))
+
+# How to display user name in KeyId in the SSH Cert
+LDAP_SUBJECT_TEMPLATE={{.User.cn}}
+# How to display group based Principals in the SSH Cert
+LDAP_PRINCIPAL_TEMPLATE={{.Group.cn}}

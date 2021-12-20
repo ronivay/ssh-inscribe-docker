@@ -1,0 +1,11 @@
+users:
+- name: {{ env['FILE_USER'] }}
+  password: {{ env['FILE_PASSWORD_HASH'] }}
+  principals: 
+  - {{ env['FILE_PRINCIPAL'] }}
+  criticalOptions: {}
+  extensions:
+    permit-pty: ""
+    permit-user-rc: ""
+    permit-agent-forwarding: ""
+    permit-X11-forwarding: ""
