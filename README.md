@@ -52,6 +52,10 @@ User inside container runs by default with UID/GID 1995, you can change this dur
 ```
 make build SSHI_UID=xxxx SSHI_GID=xxxx
 ```
+Build with specific version of ssh-inscribe
+```
+make build SSHI_VERSION=x.x.x
+```
 
 #### volumes
 
