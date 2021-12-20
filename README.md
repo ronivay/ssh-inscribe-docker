@@ -83,7 +83,7 @@ append new users to config with following lines
 
 You can generate password hash inside the container (after it's started) by running
 ```
-docker exec -itd ssh-inscribe ssh-inscribe encrypt
+docker exec -itd ssh-inscribe ssh-inscribe crypt
 ```
 You'll be prompted for password and server will return the password hash that you should put to users.yml file
 
