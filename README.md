@@ -45,7 +45,7 @@ Server is now accessible at `https://<docker-host-ip>:8540` ready to be signing 
 
 You need to use `--insecure` option with sshi client as the server is running with self-signed certificate by default. 
 
-Optionally you can use images available at [dockerhub](https://hub.docker.com/r/ronivay/ssh-inscribe-docker)
+Optionally you can use images available at [dockerhub](https://hub.docker.com/r/ronivay/ssh-inscribe)
 
 User inside container runs by default with UID/GID 1995, you can change this during build like so:
 
