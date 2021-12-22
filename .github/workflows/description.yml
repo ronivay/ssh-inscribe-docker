@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - 'README.md'
-      - '.github/workflows/readme.yml'
+      - '.github/workflows/description.yml'
 jobs:
   dockerhubdescription:
     runs-on: ubuntu-latest
