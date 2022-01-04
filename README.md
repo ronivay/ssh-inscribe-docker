@@ -59,7 +59,9 @@ make build SSHI_VERSION=x.x.x
 
 #### volumes
 
-docker-compose example will bind mount host directory to containers `/opt/sshi` path. This path contains the main configuration file, authentication file and certificate files which you can edit afterwards.
+Makefile will create ./sshi directory with correct permissions. docker-compose example will bind mount this host directory to containers `/opt/sshi` path. This path contains the main configuration file, authentication file and certificate files which you can edit afterwards.
+
+If not using Makefile and provided docker-compose example, you need to create this directory manually and give it proper permissions for container bootstrap to work.
 
 #### additional users
 

@@ -13,5 +13,6 @@ build-container:
 .PHONY: genconfig
 genconfig:
 	@ [ ! -f .env ] && cp env-example .env || true
+	@ mkdir -p ./sshi && chown $(SSHI_UID):$(SSHI_GID) ./sshi
 
 build: build-container genconfig
